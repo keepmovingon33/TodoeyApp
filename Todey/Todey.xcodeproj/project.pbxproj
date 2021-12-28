@@ -15,6 +15,11 @@
 		33F3BE002777B93600F4A8CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F3BDFE2777B93600F4A8CF /* LaunchScreen.storyboard */; };
 		33F3BE0C2778197F00F4A8CF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE0B2778197F00F4A8CF /* Item.swift */; };
 		33F3BE3227793CA900F4A8CF /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE3027793CA900F4A8CF /* DataModel.xcdatamodeld */; };
+		33F3BE6E277A9FFF00F4A8CF /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE6A277A9FFF00F4A8CF /* Item+CoreDataClass.swift */; };
+		33F3BE6F277A9FFF00F4A8CF /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE6B277A9FFF00F4A8CF /* Item+CoreDataProperties.swift */; };
+		33F3BE70277A9FFF00F4A8CF /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE6C277A9FFF00F4A8CF /* Category+CoreDataClass.swift */; };
+		33F3BE71277A9FFF00F4A8CF /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE6D277A9FFF00F4A8CF /* Category+CoreDataProperties.swift */; };
+		33F3BE73277AA1F500F4A8CF /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3BE72277AA1F500F4A8CF /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		33F3BE012777B93600F4A8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F3BE0B2778197F00F4A8CF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		33F3BE3127793CA900F4A8CF /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		33F3BE6A277A9FFF00F4A8CF /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33F3BE6B277A9FFF00F4A8CF /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33F3BE6C277A9FFF00F4A8CF /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33F3BE6D277A9FFF00F4A8CF /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33F3BE72277AA1F500F4A8CF /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				33F3BDF72777B93400F4A8CF /* TodoListViewController.swift */,
+				33F3BE72277AA1F500F4A8CF /* CategoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -81,6 +92,10 @@
 		33F3BE082778194200F4A8CF /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				33F3BE6A277A9FFF00F4A8CF /* Item+CoreDataClass.swift */,
+				33F3BE6B277A9FFF00F4A8CF /* Item+CoreDataProperties.swift */,
+				33F3BE6C277A9FFF00F4A8CF /* Category+CoreDataClass.swift */,
+				33F3BE6D277A9FFF00F4A8CF /* Category+CoreDataProperties.swift */,
 				33F3BE3027793CA900F4A8CF /* DataModel.xcdatamodeld */,
 				33F3BE0B2778197F00F4A8CF /* Item.swift */,
 			);
@@ -176,10 +191,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				33F3BE0C2778197F00F4A8CF /* Item.swift in Sources */,
+				33F3BE6F277A9FFF00F4A8CF /* Item+CoreDataProperties.swift in Sources */,
 				33F3BE3227793CA900F4A8CF /* DataModel.xcdatamodeld in Sources */,
 				33F3BDF82777B93400F4A8CF /* TodoListViewController.swift in Sources */,
 				33F3BDF42777B93400F4A8CF /* AppDelegate.swift in Sources */,
 				33F3BDF62777B93400F4A8CF /* SceneDelegate.swift in Sources */,
+				33F3BE71277A9FFF00F4A8CF /* Category+CoreDataProperties.swift in Sources */,
+				33F3BE70277A9FFF00F4A8CF /* Category+CoreDataClass.swift in Sources */,
+				33F3BE73277AA1F500F4A8CF /* CategoryViewController.swift in Sources */,
+				33F3BE6E277A9FFF00F4A8CF /* Item+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

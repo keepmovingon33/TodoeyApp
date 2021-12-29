@@ -15,30 +15,58 @@ class CategoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.backButtonTitle = ""
+        loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     @IBAction func addButtonTapped(_ sender: UITabBarItem) {
         let alert = UIAlertController(title: "Add Category", message: "Type category you want", preferredStyle: .alert)
-        alert.addTextField()
-        let doneButton = UIAlertAction(title: "Done", style: .default) { [weak self] action in
+        alert.addTextField { alertTextField in
+            alertTextField.placeholder = "Enter category"
+        }
+        let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             if let textFields = alert.textFields, let text = textFields[0].text {
-                let category = Category(context: (self?.context)!)
-                
-                
+                let newCategory = Category(context: (self?.context)!)
+                newCategory.name = text
+//                newCategory.items = []
+                self?.categories.append(newCategory)
+                self?.saveData()
             }
         }
+        alert.addAction(addAction)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Data Manipulation Methods
     
     // save func to save data
     private func saveData() {
-        
+        do {
+            try context.save()
+        } catch {
+            print("Error: \(error.localizedDescription) ")
+        }
+        tableView.reloadData()
     }
     
     // load func to load data
     private func loadData() {
+        let request = Category.fetchRequest() as NSFetchRequest
+        do {
+            categories = try context.fetch(request)
+        } catch {
+            print("error: \(error.localizedDescription)")
+        }
         
+        tableView.reloadData()
     }
     
     // MARK: - UITableView Datasource Methods
@@ -48,10 +76,23 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let category = categories[indexPath.row]
+        cell.textLabel?.text = category.name
         return cell
     }
     
     // MARK: - UITableView Delegate Methods
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "GoToDetails", sender: self)
+    }
     
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToDetails", let destinationVC = segue.destination as? TodoListViewController {
+            let indexPath = sender as! IndexPath
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
 }

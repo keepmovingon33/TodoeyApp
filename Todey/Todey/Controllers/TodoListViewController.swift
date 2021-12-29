@@ -13,6 +13,12 @@ class TodoListViewController: UITableViewController {
     var itemArray = [Item]()
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var selectedCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
+    
     // create userDefault
 //    let defaults = UserDefaults.standard
     
@@ -41,7 +47,7 @@ class TodoListViewController: UITableViewController {
 //            itemArray = items
 //        }
         
-       loadItems()
+
         
     }
     
@@ -72,7 +78,7 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
         // We do Codeable to load data
 //        if let data = try? Data(contentsOf: dataFilePath!) {
 //            let decoder = PropertyListDecoder()
@@ -85,7 +91,13 @@ class TodoListViewController: UITableViewController {
         
         // refactor code using CoreData, we highlight this code because we pass request on parameter for this fun already
 //        let request = Item.fetchRequest() as NSFetchRequest<Item>
-        
+        let categoryPredicate = NSPredicate(format: "categoryParent.name MATCHES %@", selectedCategory!.name!)
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+       
         do {
            itemArray =  try context.fetch(request)
         } catch {
@@ -147,6 +159,7 @@ class TodoListViewController: UITableViewController {
             let newItem = Item(context: (self?.context)!)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.categoryParent = self?.selectedCategory
             
             self?.itemArray.append(newItem)
             
@@ -173,12 +186,12 @@ extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let request = Item.fetchRequest() as NSFetchRequest
         // [cd] mean case Insensitive
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
     
         let sortDescriptr = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sortDescriptr]
         
-        loadItems(with: request)
+        loadItems(with: request, predicate: predicate)
     }
     
     // after we delete the text on search bar, the tableView doesn't load all data in coredata. so this func will fix that bug

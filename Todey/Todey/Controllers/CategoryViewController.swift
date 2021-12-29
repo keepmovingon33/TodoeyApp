@@ -87,11 +87,9 @@ class CategoryViewController: UITableViewController {
         performSegue(withIdentifier: "GoToDetails", sender: self)
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToDetails", let destinationVC = segue.destination as? TodoListViewController {
-            let indexPath = sender as! IndexPath
+        let destinationVC = segue.destination as! TodoListViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categories[indexPath.row]
         }
     }
